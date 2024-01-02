@@ -1,5 +1,5 @@
-org: trainwithshubham
-app: testing-end-to-end
+org: iamamash
+app: serverless-taskmaster-aws-app
 service: serverless-taskmaster-aws-app
 frameworkVersion: '3'
 
@@ -12,7 +12,7 @@ provider:
       Action:
         - dynamodb:*
       Resource:
-        - arn:aws:dynamodb:us-east-1:626072240565:table/KaamKaro
+        - arn:aws:dynamodb:us-east-1:042770045671:table/insertion
 
 functions:
   hello:
@@ -21,31 +21,31 @@ functions:
       - httpApi:
           path: /
           method: get
-  kaamBharo:
-    handler: src/kaamBharo.handler
+  insertData:
+    handler: src/insertData.handler
     events:
       - httpApi:
-          path: /kaam
+          path: /data
           method: post
-  kaamDikhao:
-    handler: src/kaamDikhao.handler
+  getData:
+    handler: src/getData.handler
     events:
       - httpApi:
-          path: /kaam
+          path: /data
           method: get
-  kaamKhatamKaro:
-    handler: src/kaamKhatamKaro.handler
+  updateData:
+    handler: src/updateData.handler
     events:
       - httpApi:
-          path: /kaam/{id}
+          path: /data/{id}
           method: put
 
 resources:
   Resources:
-    KaamKaro:
+    insertData:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: KaamKaro
+        TableName: insertion
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
